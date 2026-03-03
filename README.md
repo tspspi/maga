@@ -10,7 +10,7 @@ with OpenCL.
 > magic, magical
 
 
-![](doc/maga01.png)
+![](https://raw.githubusercontent.com/tspspi/maga/master/doc/maga01.png)
 
 ## License
 
@@ -28,6 +28,6 @@ Detailed usage examples can be seen in the ```examples``` directory.
 
 ## Validation
 
-![Simulation of a Helmholz coil pair](verification/res/case_hh_1.png)
+![Simulation of a Helmholz coil pair](https://raw.githubusercontent.com/tspspi/maga/refs/heads/master/verification/res/case_hh_1.png)
 
 Validation scenarios can be found in the ```verification``` directory.
