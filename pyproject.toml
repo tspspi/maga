@@ -1,0 +1,123 @@
+[build-system]
+requires = [
+	"setuptools>=63.1.0",
+	"wheel>=0.45.1",
+	"setuptools-git-versioning"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pymaga"
+dynamic = [ "version" ]
+description = "Magnetic Analysis with GPU Acceleration - A Python library for GPU-accelerated magnetic field calculations using the Biot-Savart law"
+authors = [
+        { name = "Thomas Spielauer", email = "pypipackages01@tspi.at" }
+]
+readme = "README.md"
+license = "BSD-3-Clause"
+license-files = [ "LICENSE.md" ]
+requires-python = ">=3.10"
+keywords = [
+    "magnetic-field",
+    "biot-savart",
+    "gpu-acceleration",
+    "opencl",
+    "physics",
+    "electromagnetic",
+    "simulation",
+    "coils",
+    "scientific-computing"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "numpy>=1.26.4",
+    "pyopencl>=2018.2",
+]
+
+[project.optional-dependencies]
+visualization = [
+    "matplotlib>=3.8.0",
+]
+dev = [
+    "pytest>=8.1.1",
+    "pytest-cov>=2.0"
+]
+all = [
+    "pymaga[visualization,dev]"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/tspspi/maga"
+"Bug Reports" = "https://github.com/tspspi/maga/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["maga*"]
+
+[tool.setuptools.package-data]
+maga = ["*.cl", "kernels/*.cl"]
+
+[tool.pytest.ini_options]
+minversion = "8.1.1"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "gpu: marks tests that require GPU/OpenCL support",
+    "integration: marks tests as integration tests",
+]
+
+[tool.pytest.coverage.run]
+source = ["src/maga"]
+omit = [
+    "*/tests/*",
+    "*/examples/*",
+    "*/__pycache__/*",
+]
+
+[tool.pytest.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/examples/*",
+]
+
+[tool.coverage.report]
+precision = 2
+skip_covered = false
+skip_empty = false
+sort = "cover"
