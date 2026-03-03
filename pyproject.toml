@@ -121,3 +121,7 @@ precision = 2
 skip_covered = false
 skip_empty = false
 sort = "cover"
+
+[tool.setuptools-git-versioning]
+enabled = true
+
